@@ -261,3 +261,10 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+
+.weather-note {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 4px;
+}
