@@ -270,15 +270,32 @@ footer {
 }
 
 .cart-card__remove {
-  margin-top: 6px;
-  padding: 4px 10px;
-  background: #f2f2f2;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  grid-row: 3;
+  grid-column: 2 / 4;
+  justify-self: end;
+  margin: 0.25rem 0 0.75rem;
+  padding: 0.35rem 0.9rem;
+  background-color: transparent;
+  border: 2px solid var(--tertiary-color);
+  border-radius: 999px;
+  color: var(--tertiary-color);
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: var(--small-font);
+  font-weight: bold;
+  letter-spacing: 0.02em;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .cart-card__remove:hover {
-  background: #e0e0e0;
+  background-color: var(--tertiary-color);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.cart-card__remove:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
 }
