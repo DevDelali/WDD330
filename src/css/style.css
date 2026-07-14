@@ -268,3 +268,17 @@ footer {
   color: #666;
   margin-top: 4px;
 }
+
+.cart-card__remove {
+  margin-top: 6px;
+  padding: 4px 10px;
+  background: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.cart-card__remove:hover {
+  background: #e0e0e0;
+}
