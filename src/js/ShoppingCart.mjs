@@ -19,9 +19,11 @@ function cartItemTemplate(item, index) {
 }
 
 export default class ShoppingCart {
-    constructor(listElement, clearButton) {
+    constructor(listElement, clearButton, footerElement, totalElement) {
         this.listElement = listElement;
         this.clearButton = clearButton;
+        this.footerElement = footerElement;
+        this.totalElement = totalElement;
     }
 
     async init() {
@@ -53,7 +55,24 @@ export default class ShoppingCart {
     renderCartContents() {
         const items = this.getCartItems();
         renderListWithTemplate(cartItemTemplate, this.listElement, items, "afterbegin", true);
+        this.renderCartTotal(items);
         this.attachRemoveListeners();
+    }
+
+    renderCartTotal(items) {
+        if (!this.footerElement || !this.totalElement) return;
+
+        if (items.length === 0) {
+            this.footerElement.classList.add("hide");
+            return;
+        }
+
+        const total = items.reduce(
+            (sum, item) => sum + Number.parseFloat(item.FinalPrice || 0),
+            0,
+        );
+        this.totalElement.textContent = `Total: $${total.toFixed(2)}`;
+        this.footerElement.classList.remove("hide");
     }
 
     attachRemoveListeners() {
