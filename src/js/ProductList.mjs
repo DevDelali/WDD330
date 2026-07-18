@@ -3,7 +3,7 @@ import { renderListWithTemplate } from "./utils.mjs";
 function productCardTemplate(product) {
   const imagePath = product.Image.replace("../images/", "/images/");
   return `<li class="product-card">
-    <a href="product_pages/?product=${product.Id}">
+    <a href="/product_pages/?product=${product.Id}">
       <img src="${imagePath}" alt="${product.NameWithoutBrand}" />
       <h3>${product.Brand.Name}</h3>
       <h2 class="card__name">${product.NameWithoutBrand}</h2>
