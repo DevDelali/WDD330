@@ -1,15 +1,18 @@
 import { renderListWithTemplate } from "./utils.mjs";
 
 function productCardTemplate(product) {
-  const imagePath = product.Image.replace("../images/", "/images/");
-  return `<li class="product-card">
-    <a href="product_pages/?product=${product.Id}">
-      <img src="${imagePath}" alt="${product.NameWithoutBrand}" />
-      <h3>${product.Brand.Name}</h3>
-      <h2 class="card__name">${product.NameWithoutBrand}</h2>
-      <p class="product-card__price">$${product.FinalPrice}</p>
-    </a>
-  </li>`;
+  const imagePath = product.Images.PrimaryMedium;
+
+  return `
+    <li class="product-card">
+      <a href="../product_pages/index.html?product=${product.Id}">
+        <img src="${imagePath}" alt="${product.NameWithoutBrand}" />
+        <h3>${product.Brand.Name}</h3>
+        <h2 class="card__name">${product.NameWithoutBrand}</h2>
+        <p class="product-card__price">$${product.FinalPrice}</p>
+      </a>
+    </li>
+  `;
 }
 
 export default class ProductList {
@@ -20,11 +23,17 @@ export default class ProductList {
   }
 
   async init() {
-    const list = await this.dataSource.getData();
+    const list = await this.dataSource.getData(this.category);
     this.renderList(list);
   }
 
   renderList(list) {
-    renderListWithTemplate(productCardTemplate, this.listElement, list, "afterbegin", true);
+    renderListWithTemplate(
+      productCardTemplate,
+      this.listElement,
+      list,
+      "afterbegin",
+      true
+    );
   }
 }
