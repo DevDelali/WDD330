@@ -35,9 +35,37 @@ export default class ProductList {
   async init() {
     const list = await this.dataSource.getData(this.category);
     this.renderList(list);
+    this.bindSortEvents(list);
+  }
+
+  sortList(list, sortBy) {
+    const sortedList = [...list];
+
+    if (sortBy === "name") {
+      return sortedList.sort((a, b) => a.NameWithoutBrand.localeCompare(b.NameWithoutBrand));
+    }
+
+    if (sortBy === "price") {
+      return sortedList.sort((a, b) => a.FinalPrice - b.FinalPrice);
+    }
+
+    return sortedList;
+  }
+
+  bindSortEvents(list) {
+    const sortSelect = document.getElementById("sortBy");
+
+    if (!sortSelect) return;
+
+    sortSelect.addEventListener("change", (event) => {
+      const selectedValue = event.target.value;
+      const sortedList = this.sortList(list, selectedValue);
+      this.renderList(sortedList);
+    });
   }
 
   renderList(list) {
+    this.listElement.innerHTML = "";
     renderListWithTemplate(productCardTemplate, this.listElement, list, "afterbegin", true);
   }
 }
