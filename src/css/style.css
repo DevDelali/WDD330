@@ -236,6 +236,17 @@ button {
   padding: 1rem;
 }
 
+.products label {
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.products select {
+  margin-left: 0.5rem;
+  padding: 0.35rem 0.5rem;
+}
+
 .product-list {
   display: flex;
   flex-flow: row wrap;

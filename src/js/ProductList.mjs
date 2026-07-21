@@ -30,16 +30,17 @@ export default class ProductList {
     this.category = category;
     this.dataSource = dataSource;
     this.listElement = listElement;
+    this.allProducts = [];
   }
 
   async init() {
-    const list = await this.dataSource.getData(this.category);
-    this.renderList(list);
-    this.bindSortEvents(list);
+    this.allProducts = await this.dataSource.getData(this.category);
+    this.renderList(this.allProducts);
+    this.bindSortEvents();
   }
 
-  sortList(list, sortBy) {
-    const sortedList = [...list];
+  sortList(sortBy) {
+    const sortedList = [...this.allProducts];
 
     if (sortBy === "name") {
       return sortedList.sort((a, b) => a.NameWithoutBrand.localeCompare(b.NameWithoutBrand));
@@ -52,14 +53,14 @@ export default class ProductList {
     return sortedList;
   }
 
-  bindSortEvents(list) {
+  bindSortEvents() {
     const sortSelect = document.getElementById("sortBy");
 
     if (!sortSelect) return;
 
     sortSelect.addEventListener("change", (event) => {
       const selectedValue = event.target.value;
-      const sortedList = this.sortList(list, selectedValue);
+      const sortedList = this.sortList(selectedValue);
       this.renderList(sortedList);
     });
   }
