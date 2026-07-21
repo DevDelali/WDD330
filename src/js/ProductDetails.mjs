@@ -1,7 +1,20 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
+function getProductImage(product) {
+  if (product.Images?.PrimaryMedium) {
+    return product.Images.PrimaryMedium;
+  }
+  if (product.Images?.PrimaryLarge) {
+    return product.Images.PrimaryLarge;
+  }
+  if (product.Image) {
+    return product.Image.replace("../images/", "/images/");
+  }
+  return "/images/placeholder.jpg";
+}
+
 function productDetailsTemplate(product) {
-  const imagePath = product.Image.replace("../images/", "/images/");
+  const imagePath = getProductImage(product);
   const color = product.Colors?.[0]?.ColorName || "Not specified";
 
   return `
