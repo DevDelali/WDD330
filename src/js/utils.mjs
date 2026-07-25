@@ -14,6 +14,17 @@ export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
 
+export function updateCartCount() {
+  const cartCount = document.querySelector(".cart-count");
+  if (!cartCount) return;
+
+  const cartItems = getLocalStorage("so-cart") || [];
+  const count = Array.isArray(cartItems) ? cartItems.length : 1;
+  cartCount.textContent = count;
+  cartCount.classList.toggle("hide", count === 0);
+  cartCount.setAttribute("aria-label", `${count} item${count === 1 ? "" : "s"} in cart`);
+}
+
 // Return the value for a named parameter in the current page URL.
 export function getParam(param) {
   const queryString = window.location.search;
@@ -59,4 +70,5 @@ export async function loadHeaderFooter() {
 
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
+  updateCartCount();
 }

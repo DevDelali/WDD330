@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, updateCartCount } from "./utils.mjs";
 
 function getProductImage(product) {
   if (product.Images?.PrimaryMedium) {
@@ -55,6 +55,7 @@ export default class ProductDetails {
     const cartItems = Array.isArray(currentCart) ? currentCart : [currentCart];
     cartItems.push(this.product);
     setLocalStorage("so-cart", cartItems);
+    updateCartCount();
   }
 
   renderProductDetails() {

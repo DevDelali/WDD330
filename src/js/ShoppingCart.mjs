@@ -1,4 +1,9 @@
-import { getLocalStorage, setLocalStorage, renderListWithTemplate } from "./utils.mjs";
+import {
+    getLocalStorage,
+    setLocalStorage,
+    renderListWithTemplate,
+    updateCartCount,
+} from "./utils.mjs";
 
 function cartItemTemplate(item, index) {
     return `<li class='cart-card divider'>
@@ -38,6 +43,7 @@ export default class ShoppingCart {
 
     saveCartItems(items) {
         setLocalStorage("so-cart", items);
+        updateCartCount();
     }
 
     clearCart() {

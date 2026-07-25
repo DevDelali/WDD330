@@ -146,6 +146,33 @@ button {
   width: 25px;
 }
 
+.cart a {
+  display: inline-block;
+  position: relative;
+}
+
+.cart-count {
+  align-items: center;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  color: var(--dark-grey);
+  display: flex;
+  font-size: 0.7rem;
+  font-weight: bold;
+  height: 1.15rem;
+  justify-content: center;
+  line-height: 1;
+  min-width: 1.15rem;
+  padding: 0.1rem;
+  position: absolute;
+  right: -0.6rem;
+  top: -0.5rem;
+}
+
+.cart-count.hide {
+  display: none;
+}
+
 .cart:hover svg {
   fill: gray;
 }
