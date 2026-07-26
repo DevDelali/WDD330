@@ -1,4 +1,4 @@
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductList from "./ProductList.mjs";
 import { renderBreadcrumb } from "./Breadcrumbs.mjs";
 import { getParam, loadHeaderFooter } from "./utils.mjs";
@@ -6,7 +6,7 @@ import { getParam, loadHeaderFooter } from "./utils.mjs";
 const query = getParam("query")?.trim() || "";
 const summary = document.querySelector(".search-summary");
 const resultsElement = document.querySelector(".product-list");
-const dataSource = new ProductData("tents");
+const dataSource = new ExternalServices("tents");
 
 async function displaySearchResults() {
   if (!query) {
