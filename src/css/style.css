@@ -99,15 +99,35 @@ p {
   color: var(--tertiary-color);
 }
 
-button {
-  padding: 0.5em 2em;
+button,
+.checkout-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
   background-color: var(--secondary-color);
   color: white;
-  margin: auto;
-  display: block;
   border: 0;
+  border-radius: 8px;
   font-size: var(--large-font);
   cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+button:hover,
+.checkout-btn:hover {
+  background-color: var(--tertiary-color);
+  transform: translateY(-1px);
+}
+
+button:active,
+.checkout-btn:active {
+  transform: translateY(0);
+}
+
+button {
+  margin: 0;
 }
 
 .divider {
@@ -245,6 +265,91 @@ button {
 .products select {
   margin-left: 0.5rem;
   padding: 0.35rem 0.5rem;
+}
+
+#checkout-form fieldset {
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+#checkout-form fieldset legend {
+  padding: 0 0.5rem;
+  font-weight: bold;
+}
+
+#checkout-form>fieldset {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 0.75rem 1rem;
+  align-items: center;
+}
+
+#checkout-form label {
+  text-align: right;
+}
+
+#checkout-form input {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 4px;
+  font: inherit;
+}
+
+#checkout-form button[type="submit"] {
+  grid-column: 2 / 3;
+  justify-self: start;
+  padding: 0.85rem 1.5rem;
+  background-color: var(--tertiary-color);
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 6px;
+}
+
+#checkout-form button[type="submit"]:hover {
+  background-color: var(--secondary-color);
+}
+
+.order-summary {
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1.5rem;
+}
+
+.order-summary>div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  align-items: center;
+}
+
+.order-summary>div span {
+  display: inline-flex;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  #checkout-form>fieldset {
+    grid-template-columns: 1fr;
+  }
+
+  #checkout-form label {
+    text-align: left;
+  }
+
+  #checkout-form button[type="submit"] {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .order-summary>div {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
 
 .product-list {

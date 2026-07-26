@@ -1,4 +1,4 @@
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductList from "./ProductList.mjs";
 import Alert from "./Alert.js";
 import { getWeatherRecommendation, highlightWeatherMatch } from "./weatherRecommend.mjs";
@@ -21,7 +21,7 @@ if (pageTitle) {
 }
 
 if (listElement) {
-    const dataSource = new ProductData(category);
+    const dataSource = new ExternalServices(category);
     const myList = new ProductList(category, dataSource, listElement);
     myList.init();
 }
