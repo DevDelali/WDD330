@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, alertMessage } from "./utils.mjs";
 
 export default class CheckoutProcess {
     constructor(key, outputSelector) {
@@ -142,6 +142,7 @@ export default class CheckoutProcess {
             window.location.href = "./success.html";
         } catch (error) {
             console.error("Checkout submit failed", error);
+            alertMessage("Unable to submit your order. Please try again.");
         }
     }
 }

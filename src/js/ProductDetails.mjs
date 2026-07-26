@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage, updateCartCount } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, updateCartCount, alertMessage } from "./utils.mjs";
 
 function getProductImage(product) {
   if (product.Images?.PrimaryMedium) {
@@ -56,6 +56,8 @@ export default class ProductDetails {
     cartItems.push(this.product);
     setLocalStorage("so-cart", cartItems);
     updateCartCount();
+    // show a small in-page confirmation when an item is added
+    alertMessage(`${this.product.NameWithoutBrand} added to cart`, true);
   }
 
   renderProductDetails() {

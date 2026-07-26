@@ -72,3 +72,27 @@ export async function loadHeaderFooter() {
   renderWithTemplate(footerTemplate, footerElement);
   updateCartCount();
 }
+
+export function alertMessage(message, scroll = true) {
+  const main = document.querySelector("main");
+  if (!main) return;
+
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
+  alert.setAttribute("role", "alert");
+  alert.innerHTML = `
+    <div class="alert__text">${message}</div>
+    <button type="button" class="alert__close" aria-label="Dismiss alert">×</button>
+  `;
+
+  const closeButton = alert.querySelector(".alert__close");
+  closeButton.addEventListener("click", () => {
+    alert.remove();
+  });
+
+  main.prepend(alert);
+
+  if (scroll) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}

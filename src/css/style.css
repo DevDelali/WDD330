@@ -126,6 +126,31 @@ button:active,
   transform: translateY(0);
 }
 
+.alert {
+  background-color: #f2c27d;
+  color: #2f2f2f;
+  border: 1px solid #e0a14b;
+  border-radius: 8px;
+  padding: 1rem 1rem 1rem 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.alert__text {
+  flex: 1;
+}
+
+.alert__close {
+  background: transparent;
+  border: none;
+  color: #2f2f2f;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
 button {
   margin: 0;
 }
