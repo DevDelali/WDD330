@@ -14,17 +14,30 @@ export default class CheckoutProcess {
     init() {
         this.list = getLocalStorage(this.key) || [];
         this.calculateItemSubTotal();
+        this.bindZipListener();
+    }
+
+    bindZipListener() {
+        const zipElement = document.querySelector("#zip");
+
+        if (zipElement) {
+            zipElement.addEventListener("blur", () => {
+                if (zipElement.value.trim()) {
+                    this.calculateOrderTotal();
+                }
+            });
+        }
     }
 
     calculateItemSubTotal() {
         this.subTotal = this.list.reduce(
-            (sum, item) => sum + Number.parseFloat(item.FinalPrice || 0),
+            (sum, item) => sum + Number(item.FinalPrice || 0),
             0,
         );
 
         const subtotalElement = document.querySelector(`${this.outputSelector} #subTotal`);
         if (subtotalElement) {
-            subtotalElement.innerText = `Subtotal: $${this.subTotal.toFixed(2)}`;
+            subtotalElement.textContent = `Subtotal: $${this.subTotal.toFixed(2)}`;
         }
     }
 
@@ -41,7 +54,16 @@ export default class CheckoutProcess {
         const shippingElement = document.querySelector(`${this.outputSelector} #shipping`);
         const totalElement = document.querySelector(`${this.outputSelector} #total`);
 
+        if (taxElement) {
+            taxElement.textContent = `Tax: $${this.tax.toFixed(2)}`;
+        }
 
-        tax.innerText = `$${this.tax.toFixed(2)}`;
+        if (shippingElement) {
+            shippingElement.textContent = `Shipping Estimate: $${this.shipping.toFixed(2)}`;
+        }
+
+        if (totalElement) {
+            totalElement.textContent = `Order Total: $${this.orderTotal.toFixed(2)}`;
+        }
     }
 }
