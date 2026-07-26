@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 export default class CheckoutProcess {
     constructor(key, outputSelector) {
@@ -102,27 +102,27 @@ export default class CheckoutProcess {
     }
 
     async checkout(formElement) {
-        this.calculateOrderTotal();
-        const formValues = this.formDataToJSON(formElement);
-
-        const order = {
-            orderDate: new Date().toISOString(),
-            fname: formValues.fname || "",
-            lname: formValues.lname || "",
-            street: formValues.address || "",
-            city: formValues.city || "",
-            state: formValues.state || "",
-            zip: formValues.zip || "",
-            cardNumber: formValues.card || formValues.cardNumber || "",
-            expiration: formValues.exp || formValues.expiration || "",
-            cvv: formValues.cvv || "",
-            items: this.packageItems(this.list),
-            orderTotal: Number(this.orderTotal.toFixed(2)),
-            shipping: Number(this.shipping.toFixed(2)),
-            tax: Number(this.tax.toFixed(2)),
-        };
-
         try {
+            this.calculateOrderTotal();
+            const formValues = this.formDataToJSON(formElement);
+
+            const order = {
+                orderDate: new Date().toISOString(),
+                fname: formValues.fname || "",
+                lname: formValues.lname || "",
+                street: formValues.address || "",
+                city: formValues.city || "",
+                state: formValues.state || "",
+                zip: formValues.zip || "",
+                cardNumber: formValues.card || formValues.cardNumber || "",
+                expiration: formValues.exp || formValues.expiration || "",
+                cvv: formValues.cvv || "",
+                items: this.packageItems(this.list),
+                orderTotal: Number(this.orderTotal.toFixed(2)),
+                shipping: Number(this.shipping.toFixed(2)),
+                tax: Number(this.tax.toFixed(2)),
+            };
+
             const response = await fetch("https://wdd330-backend.onrender.com/3000/checkout", {
                 method: "POST",
                 headers: {
@@ -131,8 +131,15 @@ export default class CheckoutProcess {
                 body: JSON.stringify(order),
             });
 
+            if (!response.ok) {
+                throw new Error(`Server returned ${response.status}`);
+            }
+
             const result = await response.json();
             console.log("Order submitted", result);
+
+            setLocalStorage(this.key, []);
+            window.location.href = "./success.html";
         } catch (error) {
             console.error("Checkout submit failed", error);
         }
