@@ -327,6 +327,82 @@ button {
   white-space: nowrap;
 }
 
+.modal-open {
+  overflow: hidden;
+}
+
+.registration-prompt {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 1rem;
+  position: fixed;
+  z-index: 10;
+}
+
+.registration-prompt__dialog {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  max-width: 32rem;
+  padding: 2rem;
+  position: relative;
+  text-align: center;
+}
+
+.registration-prompt__eyebrow {
+  color: var(--tertiary-color);
+  font-size: var(--small-font);
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.registration-prompt__dialog h2 {
+  margin: 0.5rem 0;
+}
+
+.registration-prompt__dialog > p {
+  padding: 0.5rem 0;
+}
+
+.registration-prompt__form {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.registration-prompt__form input {
+  border: 1px solid var(--light-grey);
+  border-radius: 6px;
+  font: inherit;
+  padding: 0.6rem 0.75rem;
+}
+
+.registration-prompt__form button {
+  width: 100%;
+}
+
+.registration-prompt__details {
+  color: #666;
+  font-size: var(--small-font);
+}
+
+.registration-prompt__close {
+  background: transparent;
+  color: var(--dark-grey);
+  font-size: 1.75rem;
+  line-height: 1;
+  padding: 0.25rem 0.5rem;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+}
+
 .categories {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

@@ -3,6 +3,7 @@ import ProductList from "./ProductList.mjs";
 import Alert from "./Alert.js";
 import { getWeatherRecommendation, highlightWeatherMatch } from "./weatherRecommend.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
+import { showRegistrationPrompt } from "./registrationPrompt.js";
 
 const dataSource = new ExternalServices("tents");
 const listElement = document.querySelector(".product-list");
@@ -24,4 +25,5 @@ async function initWeather() {
 
 initWeather();
 loadHeaderFooter();
+showRegistrationPrompt();
 
